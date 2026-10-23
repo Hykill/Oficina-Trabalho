@@ -28,11 +28,11 @@ public class ClienteEntity {
     @Column (nullable = false)
     private String nome;
 
-    @Column (nullable = false)
+    @Column (nullable = false, unique = true)
     private String cpf;
 
     @Column
-    private String telefone;
+    private String telefone;                                                                        
     
     @Column 
     private String email;

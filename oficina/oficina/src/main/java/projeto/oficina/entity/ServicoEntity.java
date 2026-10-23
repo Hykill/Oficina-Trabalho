@@ -31,6 +31,9 @@ public class ServicoEntity {
     @Column (nullable = false)
     private Double maoDeObra;
 
+    @Column
+    private String observacao;
+
     @OneToOne 
     @JoinColumn (name = "item_servico_id")
     private ItemServicoEntity itemServico;

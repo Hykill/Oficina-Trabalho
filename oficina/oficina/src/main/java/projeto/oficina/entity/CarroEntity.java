@@ -32,7 +32,7 @@ public class CarroEntity {
     @Column (nullable = false)
     private String marca;
 
-    @Column (nullable = false)
+    @Column (nullable = false, unique = true)
     private String placa;
 
 
