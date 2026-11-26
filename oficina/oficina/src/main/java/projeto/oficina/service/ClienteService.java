@@ -69,7 +69,6 @@ public class ClienteService {
         clienteRepository.delete(cliente);
     }
 
-    // ---------- Métodos auxiliares (uso interno) ----------
 
     private ClienteEntity buscarEntityPorId(Long id) {
         return clienteRepository.findById(id)
