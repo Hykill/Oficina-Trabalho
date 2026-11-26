@@ -1,0 +1,23 @@
+# Arquivos gerados pela compilação (Maven)
+target/
+
+# Maven Wrapper: o .jar é baixado automaticamente
+.mvn/wrapper/maven-wrapper.jar
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+.factorypath
+bin/
+
+# Arquivos de apoio mantidos só localmente
+database/
+postman/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db

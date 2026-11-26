@@ -37,6 +37,6 @@ public class CarroEntity {
 
 
     @ManyToOne 
-    @JoinColumn (name = "cliente_id")
-    private ClienteEntity clienteId;
+    @JoinColumn (name = "cliente_id", nullable = false)
+    private ClienteEntity cliente;
 }

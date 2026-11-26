@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,15 +15,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Entity 
+@Entity
 @Table (name = "servicos")
-@Getter 
-@Setter 
-@NoArgsConstructor 
-@AllArgsConstructor 
-@Builder 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ServicoEntity {
-    @Id 
+    @Id
     @GeneratedValue (strategy =  GenerationType.IDENTITY)
     private Long id;
 
@@ -34,13 +33,7 @@ public class ServicoEntity {
     @Column
     private String observacao;
 
-    @OneToOne 
-    @JoinColumn (name = "item_servico_id")
-    private ItemServicoEntity itemServico;
-
-    @ManyToOne 
-    @JoinColumn (name = "carro_id")
-    private CarroEntity carroId;
-
-
+    @ManyToOne
+    @JoinColumn (name = "carro_id", nullable = false)
+    private CarroEntity carro;
 }
