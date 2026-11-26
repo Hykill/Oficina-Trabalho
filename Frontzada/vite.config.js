@@ -2,7 +2,9 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  // No GitHub Pages o site fica em https://hykill.github.io/Oficina-Trabalho/
+  base: command === 'build' ? '/Oficina-Trabalho/' : '/',
   plugins: [vue()],
   resolve: {
     alias: {
@@ -24,4 +26,4 @@ export default defineConfig({
       }
     }
   }
-})
+}))
