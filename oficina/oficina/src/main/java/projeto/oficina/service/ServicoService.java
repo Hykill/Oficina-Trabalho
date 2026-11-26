@@ -13,6 +13,7 @@ import projeto.oficina.entity.CarroEntity;
 import projeto.oficina.entity.ServicoEntity;
 import projeto.oficina.mapper.ServicoMapper;
 import projeto.oficina.repository.CarroRepository;
+import projeto.oficina.repository.ConclusaoServicoRepository;
 import projeto.oficina.repository.ItemServicoRepository;
 import projeto.oficina.repository.ServicoRepository;
 
@@ -23,6 +24,7 @@ public class ServicoService {
     private final ServicoRepository servicoRepository;
     private final CarroRepository carroRepository;
     private final ItemServicoRepository itemServicoRepository;
+    private final ConclusaoServicoRepository conclusaoServicoRepository;
     private final ServicoMapper servicoMapper;
 
     public ServicoResponseDTO cadastrar(ServicoDTO dto) {
@@ -64,6 +66,11 @@ public class ServicoService {
         if (itemServicoRepository.existsByServicoId(id)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     "Não é possível excluir: o serviço possui itens cadastrados");
+        }
+
+        if (conclusaoServicoRepository.existsByServicoId(id)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Não é possível excluir: o serviço está marcado como pronto");
         }
 
         servicoRepository.delete(servico);
