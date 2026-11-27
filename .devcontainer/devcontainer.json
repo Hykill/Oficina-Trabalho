@@ -10,8 +10,10 @@
   "portsAttributes": {
     "8080": { "label": "API Spring", "onAutoForward": "silent" }
   },
-  // Sobe o backend sozinho toda vez que o Codespace liga
-  "postStartCommand": "setsid nohup bash .devcontainer/iniciar-backend.sh > /tmp/iniciar-backend.log 2>&1 &",
+  // Sobe o backend sozinho quando o Codespace liga e sempre que alguém se conecta
+  // (o script não sobe um segundo backend se já houver um rodando)
+  "postStartCommand": "setsid nohup bash .devcontainer/iniciar-backend.sh > /tmp/iniciar-backend.log 2>&1 < /dev/null &",
+  "postAttachCommand": "setsid nohup bash .devcontainer/iniciar-backend.sh >> /tmp/iniciar-backend.log 2>&1 < /dev/null &",
   "customizations": {
     "vscode": {
       "extensions": ["vscjava.vscode-java-pack"]
