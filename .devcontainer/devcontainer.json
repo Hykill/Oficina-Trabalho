@@ -1,0 +1,20 @@
+{
+  "name": "Oficina (backend + MySQL)",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": { "label": "API Spring", "onAutoForward": "silent" }
+  },
+  // Sobe o backend sozinho toda vez que o Codespace liga
+  "postStartCommand": "setsid nohup bash .devcontainer/iniciar-backend.sh > /tmp/iniciar-backend.log 2>&1 &",
+  "customizations": {
+    "vscode": {
+      "extensions": ["vscjava.vscode-java-pack"]
+    }
+  }
+}

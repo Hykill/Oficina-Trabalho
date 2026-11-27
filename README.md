@@ -33,6 +33,22 @@ npm run dev
 O painel sobe em `http://localhost:5173` e repassa as chamadas `/api/*` para o backend.
 Mais detalhes em [frontend/README.md](frontend/README.md).
 
+## Backend no GitHub Codespaces
+
+O repositório já vem configurado (pasta `.devcontainer/`): ao abrir um Codespace,
+o MySQL e o backend sobem sozinhos e a porta 8080 fica pública.
+
+1. No GitHub: **Code → Codespaces → Create codespace on main**.
+2. Espere uns 2–3 minutos. O endereço da API aparece na aba **Ports** (porta 8080)
+   e em `/tmp/iniciar-backend.log`, no formato
+   `https://<nome-do-codespace>-8080.app.github.dev`.
+3. Só na primeira vez: em **Settings → Secrets and variables → Actions → Variables**,
+   crie a variável `API_URL` com esse endereço e rode de novo o workflow
+   **Deploy do front no GitHub Pages** (aba Actions → Run workflow).
+
+O Codespace desliga sozinho depois de um tempo sem uso. Para usar o site de novo,
+basta religá-lo em **Code → Codespaces**: o endereço e os dados do banco continuam os mesmos.
+
 ## Deploy
 
 Todo push na `main` que altera `frontend/` publica o painel em

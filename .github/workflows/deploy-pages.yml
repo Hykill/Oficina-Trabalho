@@ -29,10 +29,12 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
-      # No Pages não existe o proxy do Vite: o front chama o Spring direto
+      # No Pages não existe o proxy do Vite: o front chama o Spring direto.
+      # A variável API_URL (Settings > Secrets and variables > Actions > Variables)
+      # guarda o endereço do backend no Codespace; sem ela, usa localhost.
       - run: npm run build
         env:
-          VITE_API_URL: http://localhost:8080
+          VITE_API_URL: ${{ vars.API_URL || 'http://localhost:8080' }}
       # Fallback de SPA: rotas como /clientes abrem o index.html
       - run: cp dist/index.html dist/404.html
       - uses: actions/upload-pages-artifact@v3
