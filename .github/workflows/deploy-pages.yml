@@ -29,12 +29,11 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
-      # No Pages não existe o proxy do Vite: o front chama o Spring direto.
-      # A variável API_URL (Settings > Secrets and variables > Actions > Variables)
-      # pode sobrescrever; sem ela, usa o backend do Codespace "friendly goldfish".
+      # O GitHub Pages não roda o Spring Boot: o site publicado usa o
+      # modo demonstração, que simula a API no navegador (src/services/demoApi.js)
       - run: npm run build
         env:
-          VITE_API_URL: ${{ vars.API_URL || 'https://friendly-goldfish-6x6x75pw5643r67p-8080.app.github.dev' }}
+          VITE_MODO_DEMO: 'true'
       # Fallback de SPA: rotas como /clientes abrem o index.html
       - run: cp dist/index.html dist/404.html
       - uses: actions/upload-pages-artifact@v3

@@ -1,8 +1,22 @@
 <script setup>
-import { Moon, Sun, Check } from 'lucide-vue-next'
+import { ref } from 'vue'
+import { Moon, Sun, Check, RotateCcw } from 'lucide-vue-next'
+import ConfirmDialog from '@/components/ConfirmDialog.vue'
 import { useSettings } from '@/composables/useSettings'
+import { useToast } from '@/composables/useToast'
+import { MODO_DEMO } from '@/services/api'
+import { restaurarDadosDeExemplo } from '@/services/demoApi'
 
 const { settings } = useSettings()
+const toast = useToast()
+
+// Modo demonstração: volta o "banco" do navegador para os dados de exemplo
+const confirmandoRestauracao = ref(false)
+function restaurar() {
+  restaurarDadosDeExemplo()
+  confirmandoRestauracao.value = false
+  toast.sucesso('Dados de exemplo restaurados.')
+}
 
 const temas = [
   { valor: 'escuro', nome: 'Escuro', descricao: 'Tons de preto e cinza', icone: Moon },
@@ -58,11 +72,38 @@ const temas = [
         </div>
       </div>
     </div>
+
+    <div v-if="MODO_DEMO" class="card tema-card demo-card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">Modo demonstração</h2>
+          <p class="card-subtitle">
+            Este site roda sem servidor: os dados ficam salvos só neste navegador.
+          </p>
+        </div>
+      </div>
+      <div class="card-body">
+        <button class="btn btn-secondary" @click="confirmandoRestauracao = true">
+          <RotateCcw :size="16" /> Restaurar dados de exemplo
+        </button>
+      </div>
+    </div>
+
+    <ConfirmDialog
+      :aberto="confirmandoRestauracao"
+      titulo="Restaurar dados de exemplo"
+      texto-confirmar="Restaurar"
+      @cancelar="confirmandoRestauracao = false"
+      @confirmar="restaurar"
+    >
+      Tudo o que foi cadastrado neste navegador será apagado e os dados de exemplo voltarão.
+    </ConfirmDialog>
   </section>
 </template>
 
 <style scoped>
 .tema-card { max-width: 640px; }
+.demo-card { margin-top: 20px; }
 
 .opcoes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 @media (max-width: 520px) { .opcoes { grid-template-columns: 1fr; } }

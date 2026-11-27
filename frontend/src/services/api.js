@@ -1,13 +1,19 @@
 import axios from 'axios'
+import { adaptadorDemo } from './demoApi'
 
 // Instância única do Axios usada por todos os services.
 // "/api" é redirecionado pelo proxy do Vite para http://localhost:8080 (ver vite.config.js).
 export const API_BASE_URL = import.meta.env.VITE_API_URL || '/api'
 
+// No GitHub Pages não há servidor: o modo demonstração responde as
+// requisições dentro do próprio navegador (ver demoApi.js).
+export const MODO_DEMO = import.meta.env.VITE_MODO_DEMO === 'true'
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
-  headers: { 'Content-Type': 'application/json' }
+  headers: { 'Content-Type': 'application/json' },
+  ...(MODO_DEMO && { adapter: adaptadorDemo })
 })
 
 /**

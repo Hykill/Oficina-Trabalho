@@ -33,24 +33,18 @@ npm run dev
 O painel sobe em `http://localhost:5173` e repassa as chamadas `/api/*` para o backend.
 Mais detalhes em [frontend/README.md](frontend/README.md).
 
-## Backend no GitHub Codespaces
-
-O repositório já vem configurado (pasta `.devcontainer/`): ao abrir um Codespace,
-o MySQL e o backend sobem sozinhos e a porta 8080 fica pública.
-
-1. No GitHub: **Code → Codespaces → Create codespace on main**.
-2. Espere uns 2–3 minutos. O endereço da API aparece na aba **Ports** (porta 8080)
-   e em `/tmp/iniciar-backend.log`, no formato
-   `https://<nome-do-codespace>-8080.app.github.dev`.
-3. O deploy já aponta para o Codespace **friendly goldfish**. Se criar outro Codespace,
-   troque o endereço em `.github/workflows/deploy-pages.yml` (ou crie a variável
-   `API_URL` em **Settings → Secrets and variables → Actions → Variables**) e rode de novo
-   o workflow **Deploy do front no GitHub Pages** (aba Actions → Run workflow).
-
-O Codespace desliga sozinho depois de um tempo sem uso. Para usar o site de novo,
-basta religá-lo em **Code → Codespaces**: o endereço e os dados do banco continuam os mesmos.
-
-## Deploy
+## Site publicado (modo demonstração)
 
 Todo push na `main` que altera `frontend/` publica o painel em
 https://hykill.github.io/Oficina-Trabalho/
+
+O GitHub Pages só hospeda arquivos estáticos e não roda o Spring Boot. Por isso o site
+publicado é gerado com `VITE_MODO_DEMO=true`: as chamadas à API são respondidas dentro do
+próprio navegador por [frontend/src/services/demoApi.js](frontend/src/services/demoApi.js),
+que repete as regras, mensagens e códigos HTTP dos Services do backend.
+
+- Abre direto, sem precisar ligar nenhum servidor.
+- Vem com dados de exemplo; o que for cadastrado fica salvo só no navegador de quem usa.
+- Em **Configurações → Restaurar dados de exemplo** os dados voltam ao início.
+
+Rodando local (`npm run dev`), o front usa o backend Java de verdade.
