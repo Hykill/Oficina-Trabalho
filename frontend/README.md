@@ -1,13 +1,13 @@
 # Oficina — Front-end (Vue 3 + Vite)
 
-Painel administrativo da oficina mecânica, ligado ao back-end Spring Boot da pasta `oficina/`.
+Painel administrativo da oficina mecânica, ligado ao back-end Spring Boot da pasta `backend/`.
 
 ## Como rodar
 
 Pré-requisitos: **Node.js 18 ou mais novo** (https://nodejs.org) e o back-end rodando em `http://localhost:8080`.
 
 ```bash
-cd Frontzada
+cd frontend
 npm install      # baixa as dependências (só na primeira vez)
 npm run dev      # sobe em http://localhost:5173
 ```
