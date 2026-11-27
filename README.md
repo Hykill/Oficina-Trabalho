@@ -42,9 +42,10 @@ o MySQL e o backend sobem sozinhos e a porta 8080 fica pública.
 2. Espere uns 2–3 minutos. O endereço da API aparece na aba **Ports** (porta 8080)
    e em `/tmp/iniciar-backend.log`, no formato
    `https://<nome-do-codespace>-8080.app.github.dev`.
-3. Só na primeira vez: em **Settings → Secrets and variables → Actions → Variables**,
-   crie a variável `API_URL` com esse endereço e rode de novo o workflow
-   **Deploy do front no GitHub Pages** (aba Actions → Run workflow).
+3. O deploy já aponta para o Codespace **friendly goldfish**. Se criar outro Codespace,
+   troque o endereço em `.github/workflows/deploy-pages.yml` (ou crie a variável
+   `API_URL` em **Settings → Secrets and variables → Actions → Variables**) e rode de novo
+   o workflow **Deploy do front no GitHub Pages** (aba Actions → Run workflow).
 
 O Codespace desliga sozinho depois de um tempo sem uso. Para usar o site de novo,
 basta religá-lo em **Code → Codespaces**: o endereço e os dados do banco continuam os mesmos.
